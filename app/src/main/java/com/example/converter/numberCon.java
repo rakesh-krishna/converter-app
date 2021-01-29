@@ -13,10 +13,12 @@ public class numberCon {
         exchange.put("Hexadecimal", "16");
     }
 
-    String convert(String amt, String ConFrom, String ConTO) {
+    String convert(String amt, String ConFrom, String ConTO) throws NumberFormatException{
 //        "Binary", "Quinary", "Octal", "Decimal" ,"Hexadecimal"
         int value = Integer.parseInt(amt);
+        String val="";
         int seconds = 0;
+
         switch (ConFrom) {
             case "Decimal":
                 seconds = value;
@@ -38,18 +40,24 @@ public class numberCon {
         }
         switch (ConTO) {
             case "Decimal":
-                return String.valueOf(seconds);
+                val= String.valueOf(seconds);
+                break;
             case "Hexadecimal":
-                return Integer.toHexString(seconds);
+                val= Integer.toHexString(seconds);
+                break;
             case "Octal":
-                return Integer.toOctalString(seconds);
+                val = Integer.toOctalString(seconds);
+                break;
             case "Binary":
-                return Integer.toBinaryString(seconds);
+                val = Integer.toBinaryString(seconds);
+                break;
             case "Quinary":
-                return Integer.toString(Integer.parseInt(String.valueOf(seconds), 10), 5);
+                val = Integer.toString(Integer.parseInt(String.valueOf(seconds), 10), 5);
+                break;
             default:
                 break;
         }
-        return "";
+        System.out.println(val);
+        return val;
 }
 }

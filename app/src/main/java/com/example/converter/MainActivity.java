@@ -3,6 +3,7 @@ package com.example.converter;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -17,7 +18,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     String[] country = { "INR", "USD", "EUR", "JPY", "GBP" , "AUD", "MXN" ,"KWD", "SGD" ,"MYR","AED"};
     String[] conType = { "Currency" ,"Distance", "Temperature","Time","Number"};
-    String[] dist = {"inch", "feet", "yard", "mile", "millimetre", "centimetre", "meter" , "kilometer"};
+    String[] dist = {"inch", "feet", "yard", "mile", "millimeter", "centimeter", "meter" , "kilometer"};
     String[] temps = {"Celsius", "Fahrenheit" ,"Kelvin"};
     String[] times = {"Seconds", "Minutes", "Hour", "Day", "Week", "Month" ,"Year"};
     String[] nubs = {"Binary", "Quinary", "Octal", "Decimal" ,"Hexadecimal"};
@@ -73,33 +74,45 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             String type = spin.getSelectedItem().toString();
             String From = spin2.getSelectedItem().toString();
             String To = spin3.getSelectedItem().toString();
-            switch(type) {
-                case "Currency":
-                    String val = new String();
-                    val = Double.toString((cur.convert(txt.getText().toString(),From,To)));
-                    input.setText(val);
-                    break;
-                case "Time":
+            String val = "";
+            try {
+                switch (type) {
+                    case "Currency":
+
+                        val = Double.toString((cur.convert(txt.getText().toString(), From, To)));
+                        input.setText(val);
+                        break;
+                    case "Time":
 //                     code block
-                     Timme tim = new Timme();
-                     val = Double.toString((tim.convert(txt.getText().toString(),From,To)));
-                     input.setText(val);
+                        Timme tim = new Timme();
+                        val = Double.toString((tim.convert(txt.getText().toString(), From, To)));
+                        input.setText(val);
+                        break;
 //                    System.out.println("Time selected");
-                    break;
-                case "Distance":
-                    distance dis = new distance();
-                    val = Double.toString((dis.convert(txt.getText().toString(),From,To)));
-                    input.setText(val);
-                case "Number":
-                    numberCon nn = new numberCon();
-                    val = nn.convert(txt.getText().toString(),From,To);
-                    input.setText(val);
-                case "Temperature":
-                    temperature tt = new temperature();
-                    val = String.valueOf(tt.convert(txt.getText().toString(),From,To));
-                    input.setText(val);
-                default:
-                    // code block
+//                    break;
+                    case "Distance":
+                        distance dis = new distance();
+                        val = Double.toString((dis.convert(txt.getText().toString(), From, To)));
+                        System.out.println(val);
+                        input.setText(val);
+                        break;
+                    case "Number":
+                        numberCon nn = new numberCon();
+//                    try {
+                        val = nn.convert(txt.getText().toString(), From, To);
+
+                        input.setText(val);
+                        break;
+                    case "Temperature":
+                        temperature tt = new temperature();
+                        val = String.valueOf(tt.convert(txt.getText().toString(), From, To));
+                        input.setText(val);
+                        break;
+                    default:
+                        // code block
+                }
+            } catch (NumberFormatException exception) {
+                txt.setError("Invalid input");
             }
 //            System.out.println("type :"+type);
         }
@@ -121,22 +134,30 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         case "Currency":
                             spin2.setAdapter(spin_coun);
                             spin3.setAdapter(spin_coun);
+//                            txt.setInputType(InputType.TYPE_CLASS_NUMBER);
+                            txt.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
                             break;
                         case "Time":
                             spin2.setAdapter(spin_times);
                             spin3.setAdapter(spin_times);
+//                            txt.setInputType(InputType.TYPE_CLASS_NUMBER);
+                            txt.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
                             break;
                         case "Temperature":
                             spin2.setAdapter(spin_temps);
                             spin3.setAdapter(spin_temps);
+                            txt.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
                             break;
                         case "Distance":
                             spin2.setAdapter(spin_dis);
                             spin3.setAdapter(spin_dis);
+                            txt.setInputType(InputType.TYPE_CLASS_TEXT);
                             break;
                         case "Number":
                             spin2.setAdapter(spin_nubs);
                             spin3.setAdapter(spin_nubs);
+//                            txt.setInputType(InputType.TYPE_CLASS_NUMBER);
+                            txt.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
                             break;
                         default:
                     }

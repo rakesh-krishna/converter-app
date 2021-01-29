@@ -3,10 +3,11 @@ package com.example.converter;
 import android.widget.Switch;
 
 public class Timme {
-    double convert(String Amt,String ConFrom,String ConTo)
+    double convert(String Amt,String ConFrom,String ConTo) throws NumberFormatException
     {
         double value = Double.parseDouble(Amt);
         double seconds = 0;
+        double val=0;
         switch(ConFrom){
             case "Seconds":
                 seconds = value;
@@ -40,29 +41,31 @@ public class Timme {
 //        var year = seconds / 3154000;
             switch (ConTo){
                 case "Seconds":
-                    return seconds;
+                    val= seconds;
+                    break;
                 case "Minutes":
-                    return seconds/60;
-//                    break;
+                    val= seconds/60;
+                    break;
                 case "Hour":
-                    return seconds/3600;
-//                    break;
+                    val =seconds/3600;
+                    break;
                 case "Day":
-                    return seconds/86400;
-//                    break;
+                    val = seconds/86400;
+                    break;
                 case "Week":
-                    return seconds/604800;
-//                    break;
+                    val = seconds/604800;
+                    break;
                 case "Month":
-                    return seconds/2628000;
-//                    break;
+                    val = seconds/2628000;
+                    break;
                 case "Year":
-                    return seconds/3154000;
-//                    break;
+                    val=  seconds/3154000;
+                    break;
                 default:
                     break;
             }
-        return 0.0;
+        System.out.println(val);
+        return val;
     }
 
 }

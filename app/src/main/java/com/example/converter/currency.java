@@ -45,7 +45,7 @@ public class currency {
 //        aed = (float)ae;
 //    }
 
-    double convert(String Amt,String ConFrom,String ConTo)
+    double convert(String Amt,String ConFrom,String ConTo) throws NumberFormatException
     {
 //        System.out.println(ConFrom+" con from "+ConTo);
         final double v = (double) Double.parseDouble(Amt) * ((1 / Double.parseDouble(exchange.get(ConFrom))) * (Double.parseDouble(exchange.get(ConTo))));

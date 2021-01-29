@@ -1,9 +1,10 @@
 package com.example.converter;
 
 public class temperature {
-    double convert(String Amt,String ConFrom,String ConTo) {
+    double convert(String Amt,String ConFrom,String ConTo) throws NumberFormatException{
         double value = Double.parseDouble(Amt);
         double temp = 0;
+        double val = 0;
 //        Celsius", "Fahrenheit" ,"Kelvin"
         switch (ConFrom)
         {
@@ -22,15 +23,17 @@ public class temperature {
         switch (ConTo)
         {
             case "Celsius":
-                return value;
-//                break;
+                val = value;
+                break;
             case "Fahrenheit":
-                return  (value*9/5)  + 32;
+                val =  (value*9/5)  + 32;
+                break;
             case "Kelvin":
-                return value + 273.15 ;
+                val = value + 273.15 ;
+                break;
             default:
                 break;
         }
-        return 0;
+        return val;
     }
 }

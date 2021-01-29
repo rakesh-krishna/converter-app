@@ -1,8 +1,10 @@
 package com.example.converter;
 
 public class distance {
-    double convert(String Amt,String ConFrom,String ConTo) {
+    double convert(String Amt,String ConFrom,String ConTo) throws NumberFormatException{
         double value = Double.parseDouble(Amt);
+        System.out.println(value);
+        System.out.println(Amt);
         double meter = 0;
         switch (ConFrom)
         {
@@ -41,23 +43,31 @@ public class distance {
         switch (ConTo)
         {
             case "inch":
-                return meter * 39.37;
+                meter= meter * 39.37;
+                break;
             case "feet":
-                return meter * 3.281;
+                meter= meter * 3.281;
+                break;
             case "yard":
-                return meter * 1.094;
+                meter= meter * 1.094;
+                break;
             case "mile":
-                return meter/ 1609;
+                meter= meter/ 1609;
+                break;
             case "millimeter":
-                return meter * 1000;
+                meter= meter * 1000;
+                break;
             case "centimeter":
-                return meter  * 100;
+                meter= meter  * 100;
+                break;
             case "meter":
-                return meter;
+                //meter;
+                break;
             case "kilometer":
-                return meter / 1000;
-            default:
-                return 0;
+                meter= meter / 1000;
+                break;
         }
+        System.out.println(meter);
+        return meter;
     }
 }
